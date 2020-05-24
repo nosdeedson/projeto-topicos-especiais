@@ -40,10 +40,9 @@ public class Jogo implements Serializable {
 		super();
 	}
 
-	public Jogo(Long idJogo, Bandeirinha bandeira1, Bandeirinha bandeira2, Date data, Date hora, Juiz juiz,
+	public Jogo(Bandeirinha bandeira1, Bandeirinha bandeira2, Date data, Date hora, Juiz juiz,
 			String local, Time timeCasa, Time visitante) {
-		super();
-		this.idJogo = idJogo;
+		
 		this.bandeira1 = bandeira1;
 		this.bandeira2 = bandeira2;
 		this.data = data;
@@ -67,7 +66,7 @@ public class Jogo implements Serializable {
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "id_badeira1")
+	@JoinColumn(name = "id_badeira1", nullable = false)
 	public Bandeirinha getBandeira1() {
 		return bandeira1;
 	}
@@ -78,7 +77,7 @@ public class Jogo implements Serializable {
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "id_badeira2")
+	@JoinColumn(name = "id_badeira2", nullable = false)
 	public Bandeirinha getBandeira2() {
 		return bandeira2;
 	}
@@ -99,7 +98,7 @@ public class Jogo implements Serializable {
 	}
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "hora", nullable = false)
+	@Column(name = "hora", nullable = true)
 	public Date getHora() {
 		return hora;
 	}
@@ -110,7 +109,7 @@ public class Jogo implements Serializable {
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "id_juiz")
+	@JoinColumn(name = "id_juiz", nullable = false)
 	public Juiz getJuiz() {
 		return juiz;
 	}
@@ -131,7 +130,7 @@ public class Jogo implements Serializable {
 
 	@NotNull
 	@OneToOne
-	@JoinColumn( name = "id_time_casa")
+	@JoinColumn( name = "id_time_casa", nullable = false)
 	public Time getTimeCasa() {
 		return timeCasa;
 	}
@@ -142,7 +141,7 @@ public class Jogo implements Serializable {
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn( name = "id_visitante")
+	@JoinColumn( name = "id_visitante", nullable = false)
 	public Time getVisitante() {
 		return visitante;
 	}

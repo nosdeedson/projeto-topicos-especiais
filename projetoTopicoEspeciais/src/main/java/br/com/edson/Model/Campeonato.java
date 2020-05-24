@@ -36,15 +36,16 @@ public class Campeonato implements Serializable {
 	private String segundoColocado;
 	private String terceiroColocado;
 	private FormatoCampeonatoEnum tipoCampeonato;
+	private List<Jogo> jogos = new ArrayList<Jogo>();
+	
 	public Campeonato() {
 		super();
 	}
-	public Campeonato(Date dataInicio, Date dataFim, String nome, FormatoCampeonatoEnum tipoCampeonato) {
+	public Campeonato(Date dataInicio, Date dataFim, String nome) {
 		super();
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.nome = nome;
-		this.tipoCampeonato = tipoCampeonato;
 	}
 	
 	@Id
@@ -94,7 +95,7 @@ public class Campeonato implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(name = "primeiro_colocado", nullable = false, length = 20)
+	@Column(name = "primeiro_colocado", nullable = true, length = 20)
 	public String getPrimeiroColocado() {
 		return primeiroColocado;
 	}
@@ -103,7 +104,7 @@ public class Campeonato implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(name = "segundo_colocado", nullable = false, length = 20)
+	@Column(name = "segundo_colocado", nullable = true, length = 20)
 	public String getSegundoColocado() {
 		return segundoColocado;
 	}
@@ -112,7 +113,7 @@ public class Campeonato implements Serializable {
 	}
 	
 	@NotBlank
-	@Column(name = "terceiro_colocado", nullable = false, length = 20)
+	@Column(name = "terceiro_colocado", nullable = true, length = 20)
 	public String getTerceiroColocado() {
 		return terceiroColocado;
 	}
@@ -128,6 +129,16 @@ public class Campeonato implements Serializable {
 	public void setTipoCampeonato(FormatoCampeonatoEnum tipoCampeonato) {
 		this.tipoCampeonato = tipoCampeonato;
 	}
+	
+	@OneToMany
+	public List<Jogo> getJogos() {
+		return jogos;
+	}
+	public void setJogos(List<Jogo> jogos) {
+		this.jogos = jogos;
+	}
+	 	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -135,6 +146,7 @@ public class Campeonato implements Serializable {
 		result = prime * result + ((idCampeonato == null) ? 0 : idCampeonato.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
