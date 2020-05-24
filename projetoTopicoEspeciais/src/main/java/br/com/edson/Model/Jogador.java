@@ -3,18 +3,20 @@ package br.com.edson.Model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@DiscriminatorValue("J")
+@Table(name = "jogador")
 public class Jogador extends Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private String posicao;
 	private Time time;
 	
@@ -22,10 +24,8 @@ public class Jogador extends Pessoa implements Serializable {
 		super();
 	}
 
-	public Jogador(String posicao, Time time) {
-		super();
+	public Jogador(String posicao) {
 		this.posicao = posicao;
-		this.time = time;
 	}
 	
 	@NotEmpty
@@ -39,7 +39,8 @@ public class Jogador extends Pessoa implements Serializable {
 	}
 	
 	@NotNull
-	@Column (name = "time", length = 20, nullable = false)
+	@OneToOne
+	@JoinColumn(name = "id_time")
 	public Time getTime() {
 		return time;
 	}
@@ -47,7 +48,7 @@ public class Jogador extends Pessoa implements Serializable {
 	public void setTime(Time time) {
 		this.time = time;
 	}
-	
+//	
 	
 	
 }

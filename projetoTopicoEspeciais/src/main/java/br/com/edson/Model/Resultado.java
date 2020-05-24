@@ -4,70 +4,78 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "resultado")
 public class Resultado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
-	private List<Time> empate = new ArrayList<Time>();
-	private Time perdedor;
-	private Time vencedor;
-	private Jogo jogo;
+	private Long idResultado;
+	private boolean empate;
+	private String perdedor; // recebo o nome do time
+	private String vencedor; // recebe o nome do time
 	
 	public Resultado() {
 	}
 
-	public Resultado( Jogo jogo) {
-		this.jogo = jogo;
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id_resultado")
+	public Long getIdResultado() {
+		return idResultado;
 	}
 
-	public int getId() {
-		return id;
+	public void setIdResultado(Long id) {
+		this.idResultado = id;
 	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public List<Time> getEmpate() {
+	
+	@Column( name = "empate", nullable = true)	
+	public boolean isEmpate() {
 		return empate;
 	}
 
-	public void setEmpate(List<Time> empate) {
+
+	public void setEmpate(boolean empate) {
 		this.empate = empate;
 	}
 
-	public Time getPerdedor() {
+	@Column(name = "perdedor", length = 20, nullable = true)
+	public String getPerdedor() {
 		return perdedor;
 	}
 
-	public void setPerdedor(Time perdedor) {
+
+	public void setPerdedor(String perdedor) {
 		this.perdedor = perdedor;
 	}
 
-	public Time getVencedor() {
+	@Column(name = "vencedor", length = 20, nullable = true)
+	public String getVencedor() {
 		return vencedor;
 	}
 
-	public void setGanhador(Time vencedor) {
+	public void setVencedor(String vencedor) {
 		this.vencedor = vencedor;
-	}
-
-	public Jogo getJogo() {
-		return jogo;
-	}
-
-	public void setJogo(Jogo jogo) {
-		this.jogo = jogo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((idResultado == null) ? 0 : idResultado.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -78,16 +86,13 @@ public class Resultado implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Resultado other = (Resultado) obj;
-		if (id != other.id)
+		if (idResultado == null) {
+			if (other.idResultado != null)
+				return false;
+		} else if (!idResultado.equals(other.idResultado))
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 
 }

@@ -18,7 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "campeonato")
@@ -26,136 +27,114 @@ public class Campeonato implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
-	private List<Time> colocacao = new ArrayList<Time>();
+	private Long idCampeonato;
+	private List<Time> colocacoes = new ArrayList<Time>();
 	private Date dataInicio;
 	private Date dataFim;
 	private String nome;
-	private List<Time> premiacao = new ArrayList<Time>();
-	private List<Jogo> jogos = new ArrayList<Jogo>();
-	private List<Resultado> resultados = new ArrayList<Resultado>();
-	private FormatoCampeonatoEnum formato;
-
+	private String primeiroColocado;
+	private String segundoColocado;
+	private String terceiroColocado;
+	private FormatoCampeonatoEnum tipoCampeonato;
 	public Campeonato() {
 		super();
 	}
-
-	public Campeonato(Date dataInicio, Date dataFim, String nome, List<Jogo> jogos, FormatoCampeonatoEnum formato) {
+	public Campeonato(Date dataInicio, Date dataFim, String nome, FormatoCampeonatoEnum tipoCampeonato) {
 		super();
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.nome = nome;
-		this.jogos = jogos;
-		this.formato = formato;
+		this.tipoCampeonato = tipoCampeonato;
 	}
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
-	public int getId() {
-		return id;
+	@Column(name = "id_campeonato", nullable = false)
+	public Long getIdCampeonato() {
+		return idCampeonato;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setIdCampeonato(Long idCampeonato) {
+		this.idCampeonato = idCampeonato;
 	}
 	
-	@NotNull
 	@OneToMany
-	@JoinColumn (name = "id_time")
-	public List<Time> getColocacao() {
-		return colocacao;
+	public List<Time> getColocacoes() {
+		return colocacoes;
 	}
-
-	public void setColocacao(List<Time> colocacao) {
-		this.colocacao = colocacao;
+	public void setColocacoes(List<Time> colocacoes) {
+		this.colocacoes = colocacoes;
 	}
-	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_inicio", nullable = false)
 	public Date getDataInicio() {
 		return dataInicio;
 	}
-
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-
+	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_fim", nullable = false)
 	public Date getDataFim() {
 		return dataFim;
 	}
-
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
-
-	@NotEmpty
-	@Column(name = "nome", length = 20, nullable = false)
+	
+	@NotBlank
+	@Column(name = "nome", nullable = false, length = 20)
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@OneToMany
-	@JoinColumn (name = "id_time")
-	@Column (name = "premiacao", nullable = true)
-	public List<Time> getPremiacao() {
-		return premiacao;
+	
+	@NotBlank
+	@Column(name = "primeiro_colocado", nullable = false, length = 20)
+	public String getPrimeiroColocado() {
+		return primeiroColocado;
 	}
-
-	public void setPremiacao(List<Time> premiacao) {
-		this.premiacao = premiacao;
+	public void setPrimeiroColocado(String primeiroColocado) {
+		this.primeiroColocado = primeiroColocado;
 	}
 	
-	@NotNull
-	@OneToMany
-	@JoinColumn(name = "id_jogo")
-	@Column (name = "jogo", nullable = false)
-	public List<Jogo> getJogos() {
-		return jogos;
+	@NotBlank
+	@Column(name = "segundo_colocado", nullable = false, length = 20)
+	public String getSegundoColocado() {
+		return segundoColocado;
 	}
-
-	public void setJogos(List<Jogo> jogos) {
-		this.jogos = jogos;
+	public void setSegundoColocado(String segundoColocado) {
+		this.segundoColocado = segundoColocado;
 	}
 	
-	@OneToMany
-	@JoinColumn(name = "id_resultado")
-	@Column (name = "id_resultado", nullable = true)
-	public List<Resultado> getResultados() {
-		return resultados;
+	@NotBlank
+	@Column(name = "terceiro_colocado", nullable = false, length = 20)
+	public String getTerceiroColocado() {
+		return terceiroColocado;
 	}
-
-	public void setResultados(List<Resultado> resultados) {
-		this.resultados = resultados;
+	public void setTerceiroColocado(String terceiroColocado) {
+		this.terceiroColocado = terceiroColocado;
 	}
 	
-	@NotNull
-	@Enumerated (EnumType.STRING)
-	@Column(name = "formato", nullable = false)
-	public FormatoCampeonatoEnum getFormato() {
-		return formato;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_campeonato")
+	public FormatoCampeonatoEnum getTipoCampeonato() {
+		return tipoCampeonato;
 	}
-
-	public void setFormato(FormatoCampeonatoEnum formato) {
-		this.formato = formato;
+	public void setTipoCampeonato(FormatoCampeonatoEnum tipoCampeonato) {
+		this.tipoCampeonato = tipoCampeonato;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((idCampeonato == null) ? 0 : idCampeonato.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -165,13 +144,14 @@ public class Campeonato implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Campeonato other = (Campeonato) obj;
-		if (id != other.id)
+		if (idCampeonato == null) {
+			if (other.idCampeonato != null)
+				return false;
+		} else if (!idCampeonato.equals(other.idCampeonato))
 			return false;
 		return true;
 	}
 	
 	
 	
-	
-
 }
