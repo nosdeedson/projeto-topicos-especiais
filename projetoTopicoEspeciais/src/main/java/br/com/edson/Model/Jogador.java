@@ -21,12 +21,8 @@ public class Jogador extends Pessoa implements Serializable {
 	private Time time;
 	
 	public Jogador() {
-		super();
 	}
 
-	public Jogador(String posicao) {
-		this.posicao = posicao;
-	}
 	
 	@NotEmpty
 	@Column (name = "posicao", length = 20, nullable = false)
