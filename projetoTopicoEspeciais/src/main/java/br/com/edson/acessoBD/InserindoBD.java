@@ -3,12 +3,11 @@ package br.com.edson.acessoBD;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
 import br.com.edson.Model.Bandeirinha;
 import br.com.edson.Model.Campeonato;
@@ -18,6 +17,7 @@ import br.com.edson.Model.Jogo;
 import br.com.edson.Model.Juiz;
 import br.com.edson.Model.Resultado;
 import br.com.edson.Model.Time;
+import br.com.edson.Util.JpaUtil;
 
 public class InserindoBD {
 	
@@ -32,12 +32,10 @@ public class InserindoBD {
 		Juiz j = new Juiz();
 		j.setNome(" marcos de souza");
 		
-		Jogador player = new Jogador();
+		Jogador player = new Jogador("atacante");
 		player.setNome("romario silva");
-		player.setPosicao("atacante");
 		
-		Jogador player2 = new Jogador();
-		player2.setPosicao("atacante");
+		Jogador player2 = new Jogador("atacante");
 		player2.setNome("ronaldinho");
 		
 		Time t = new Time("Palmeiras");
@@ -77,12 +75,11 @@ public class InserindoBD {
 		em.persist(b2);
 		
 		em.persist(j);
-		
-		em.persist(t);
-		em.persist(t2);
 		em.persist(player);
 		em.persist(player2);
 		
+		em.persist(t);
+		em.persist(t2);
 		em.persist(res);
 		em.persist(game);
 		em.persist(camp);
@@ -91,8 +88,8 @@ public class InserindoBD {
 
 	public static void main(String[] args) throws ParseException{
 		// TODO Auto-generated method stub
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("");
-		EntityManager em = emf.createEntityManager();
+		
+		EntityManager em = JpaUtil.obterEntity();
 		EntityTransaction et = em.getTransaction();
 		
 		et.begin();
