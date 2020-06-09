@@ -41,6 +41,14 @@ public class InserindoBD {
 		Time t = new Time("Palmeiras");
 		Time t2 = new Time("flamengo");
 		
+		List<Jogador> jogadores = new ArrayList<Jogador>();
+		jogadores.add(player);
+		jogadores.add(player2);
+		
+		t.setJogadores(jogadores);
+		t2.setJogadores(jogadores);
+		
+		
 		player.setTime(t);
 		player2.setTime(t2);
 		
@@ -53,6 +61,11 @@ public class InserindoBD {
 		game.setTimeCasa(t);
 		game.setVisitante(t2);
 		game.setJuiz(j);
+		
+		List<Jogo> jogos = new ArrayList<Jogo>();
+		
+		jogos.add(game);
+		t.setJogos(jogos);
 		
 		Resultado res = new Resultado();
 		res.setVencedor(t.getNome());
@@ -67,21 +80,29 @@ public class InserindoBD {
 		camp.setNome("campeonato rua");
 		camp.setTipoCampeonato(FormatoCampeonatoEnum.MATAMATA);
 		
-		List<Jogo> jogos = new ArrayList<Jogo>();
-		jogos.add(game);
-		camp.setJogos(jogos);
+		List<Jogo> jogoscamp = new ArrayList<Jogo>();
+		
+		
+		jogoscamp.add(game);
+		camp.setJogos(jogoscamp);
 		
 		em.persist(b1);
 		em.persist(b2);
 		
 		em.persist(j);
-		em.persist(player);
-		em.persist(player2);
 		
 		em.persist(t);
 		em.persist(t2);
-		em.persist(res);
+		
+		em.persist(player);
+		em.persist(player2);
+		
+		
+		
 		em.persist(game);
+
+		em.persist(res);
+		
 		em.persist(camp);
 		
 	}

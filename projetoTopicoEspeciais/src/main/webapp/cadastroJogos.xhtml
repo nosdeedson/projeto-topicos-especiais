@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/layout.xhtml">
+	
+	
+<f:metadata>
+	<f:viewAction action="#{cadastroJogosMBean.buscaBandeirinhas}"></f:viewAction>
+	<f:viewAction action="#{cadastroJogosMBean.buscaJuizes}"></f:viewAction>
+	<f:viewAction action="#{cadastroJogosMBean.buscaTimes}"></f:viewAction>
+</f:metadata>	
+<ui:define name="titulo">Cadastro Jogos</ui:define>
+<ui:define name="conteudo">
+
+		<h:form id="frm">
+			<p:messages />
+			<h1>Cadastre jogo</h1>
+
+			<p:panelGrid columns="2" id="pgCadastroJogo" style="width:100%;">
+				
+				<p:outputLabel value="Badeirinha 1" for="band1" />
+				<p:selectOneMenu id="band1" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+				value="#{cadastroJogosMBean.bandeirinha}">
+					<f:selectItem itemLabel="Selecione" itemValue="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroJogosMBean.bandeirinhas}" var="bandeirinha"
+					itemLabel="#{bandeirinha.nome}" itemValue="#{bandeirinha}"  />
+				</p:selectOneMenu>
+				
+				
+				<p:outputLabel value="Badeirinha 2" for="band2" />
+				<p:selectOneMenu id="band2" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+				value="#{cadastroJogosMBean.bandeirinha}">
+					<f:selectItem itemLabel="Selecione" itemValue="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroJogosMBean.bandeirinhas}" var="band" 
+					itemLabel="#{band.nome}" itemValue="#{band}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Juiz" for="juiz" />
+				<p:selectOneMenu id="juiz" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+				value="#{cadastroJogosMBean.juiz}">
+					<f:selectItem itemLabel="Selecione" itemValue="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroJogosMBean.juizes}" var="juiz" 
+						itemLabel="#{juiz.nome}" itemValue="#{juiz}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Data" for="data"/>
+				<p:calendar required="true" id="data"/>
+				<p:outputLabel value="Hora" for="hora"/>
+				<p:inputMask required="true" mask="99:99" id="hora"/>
+				<p:outputLabel value="Estádio" for="estadio"/>
+				<p:inputText id="estadio" required="true"/>
+				
+				<p:outputLabel value="Mandante" for="mandante" />
+				<p:selectOneMenu id="mandante" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+				value="#{cadastroJogosMBean.time}">
+					<f:selectItem itemLabel="Selecione" itemValue="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroJogosMBean.times}" var="time" 
+						itemLabel="#{time.nome}" itemValue="#{time}" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Visitante" for="visitante" />
+				<p:selectOneMenu id="visitante" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+				value="#{cadastroJogosMBean.time}">
+					<f:selectItem itemLabel="Selecione" itemValue="Selecione" noSelectionOption="true" />
+					<f:selectItems value="#{cadastroJogosMBean.times}" var="time" 
+						itemLabel="#{time.nome}" itemValue="#{time}" />
+				</p:selectOneMenu>
+				<p:outputLabel />
+				<p:commandButton value="salvar" update="frm" action="#{cadastroJogosMBean.salvar}" />
+			</p:panelGrid>
+
+
+		</h:form>
+
+</ui:define>
+
+
+</ui:composition>

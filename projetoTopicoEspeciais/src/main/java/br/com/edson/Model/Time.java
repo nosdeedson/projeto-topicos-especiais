@@ -69,8 +69,8 @@ public class Time implements Serializable {
 		return jogadores;
 	}
 
-	public void setJogadores(List<Jogador> jogadores) {
-		this.jogadores = jogadores;
+	public void setJogadores( List<Jogador> jogadores) {
+		this.jogadores= jogadores ;
 	}
 	
 	@NotNull
@@ -79,7 +79,7 @@ public class Time implements Serializable {
 		return jogos;
 	}
 
-	public void setJogos(List<Jogo> jogos) {
+	public void setJogos( List<Jogo> jogos) {
 		this.jogos = jogos;
 	}
 

@@ -37,7 +37,6 @@ public class Jogo implements Serializable {
 	private Resultado resultado;
 	
 	public Jogo() {
-		super();
 	}
 
 	public Jogo(Bandeirinha bandeira1, Bandeirinha bandeira2, Date data, Date hora, Juiz juiz,

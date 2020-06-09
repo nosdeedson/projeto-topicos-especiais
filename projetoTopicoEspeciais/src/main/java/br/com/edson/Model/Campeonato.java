@@ -134,8 +134,8 @@ public class Campeonato implements Serializable {
 	public List<Jogo> getJogos() {
 		return jogos;
 	}
-	public void setJogos(List<Jogo> jogos) {
-		this.jogos = jogos;
+	public void setJogos( List<Jogo> jogos ) {
+		this.jogos =jogos;
 	}
 	 	
 
