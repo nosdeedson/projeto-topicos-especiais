@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,7 +31,7 @@ public class Campeonato implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long idCampeonato;
-	private List<Time> colocacoes = new ArrayList<Time>();
+	private List<String> colocacoes = new ArrayList<String>();
 	private Date dataInicio;
 	private Date dataFim;
 	private String nome;
@@ -36,18 +39,9 @@ public class Campeonato implements Serializable {
 	private String segundoColocado;
 	private String terceiroColocado;
 	private FormatoCampeonatoEnum tipoCampeonato;
-	private List<Jogo> jogos = new ArrayList<Jogo>();
 	
-	public Campeonato() {
-		super();
-	}
-	public Campeonato(Date dataInicio, Date dataFim, String nome) {
-		super();
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
-		this.nome = nome;
-	}
-	
+	public Campeonato() {}
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id_campeonato", nullable = false)
@@ -58,13 +52,15 @@ public class Campeonato implements Serializable {
 		this.idCampeonato = idCampeonato;
 	}
 	
-	@OneToMany
-	public List<Time> getColocacoes() {
+	@ElementCollection( targetClass = String.class, fetch = FetchType.LAZY)
+	@Column(name = "comentario", nullable = true, length = 20)
+	public List<String> getColocacoes() {
 		return colocacoes;
 	}
-	public void setColocacoes(List<Time> colocacoes) {
+	public void setColocacoes(List<String> colocacoes) {
 		this.colocacoes = colocacoes;
 	}
+	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_inicio", nullable = false)
@@ -94,7 +90,6 @@ public class Campeonato implements Serializable {
 		this.nome = nome;
 	}
 	
-	@NotBlank
 	@Column(name = "primeiro_colocado", nullable = true, length = 20)
 	public String getPrimeiroColocado() {
 		return primeiroColocado;
@@ -103,7 +98,6 @@ public class Campeonato implements Serializable {
 		this.primeiroColocado = primeiroColocado;
 	}
 	
-	@NotBlank
 	@Column(name = "segundo_colocado", nullable = true, length = 20)
 	public String getSegundoColocado() {
 		return segundoColocado;
@@ -111,8 +105,7 @@ public class Campeonato implements Serializable {
 	public void setSegundoColocado(String segundoColocado) {
 		this.segundoColocado = segundoColocado;
 	}
-	
-	@NotBlank
+
 	@Column(name = "terceiro_colocado", nullable = true, length = 20)
 	public String getTerceiroColocado() {
 		return terceiroColocado;
@@ -128,16 +121,7 @@ public class Campeonato implements Serializable {
 	}
 	public void setTipoCampeonato(FormatoCampeonatoEnum tipoCampeonato) {
 		this.tipoCampeonato = tipoCampeonato;
-	}
-	
-	@OneToMany
-	public List<Jogo> getJogos() {
-		return jogos;
-	}
-	public void setJogos( List<Jogo> jogos ) {
-		this.jogos =jogos;
-	}
-	 	
+	} 	
 
 	@Override
 	public int hashCode() {

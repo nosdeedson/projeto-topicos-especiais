@@ -1,23 +1,18 @@
 package br.com.edson.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "jogo")
@@ -28,8 +23,9 @@ public class Jogo implements Serializable {
 	private Long idJogo;
 	private Bandeirinha bandeira1;
 	private Bandeirinha bandeira2;
+	private Campeonato campeonato;
 	private Date data;
-	private Date hora;
+	private String hora;
 	private Juiz juiz;
 	private String local;
 	private Time timeCasa;
@@ -37,19 +33,6 @@ public class Jogo implements Serializable {
 	private Resultado resultado;
 	
 	public Jogo() {
-	}
-
-	public Jogo(Bandeirinha bandeira1, Bandeirinha bandeira2, Date data, Date hora, Juiz juiz,
-			String local, Time timeCasa, Time visitante) {
-		
-		this.bandeira1 = bandeira1;
-		this.bandeira2 = bandeira2;
-		this.data = data;
-		this.hora = hora;
-		this.juiz = juiz;
-		this.local = local;
-		this.timeCasa = timeCasa;
-		this.visitante = visitante;
 	}
 
 	@Id
@@ -63,7 +46,6 @@ public class Jogo implements Serializable {
 		this.idJogo = idJogo;
 	}
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_badeira1", nullable = false)
 	public Bandeirinha getBandeira1() {
@@ -74,7 +56,7 @@ public class Jogo implements Serializable {
 		this.bandeira1 = bandeira1;
 	}
 	
-	@NotNull
+	
 	@OneToOne
 	@JoinColumn(name = "id_badeira2", nullable = false)
 	public Bandeirinha getBandeira2() {
@@ -85,7 +67,17 @@ public class Jogo implements Serializable {
 		this.bandeira2 = bandeira2;
 	}
 	
-	@NotNull
+	
+	@OneToOne
+	@JoinColumn(name = "id_campeonato", nullable = false)
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
+
+	public void setCampeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
+	}
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data", nullable = false)
 	public Date getData() {
@@ -95,18 +87,18 @@ public class Jogo implements Serializable {
 	public void setData(Date data) {
 		this.data = data;
 	}
-
-	@Temporal(TemporalType.TIME)
-	@Column(name = "hora", nullable = true)
-	public Date getHora() {
+	
+	
+	@Column(name = "hora", length = 5, nullable = false)
+	public String getHora() {
 		return hora;
 	}
-
-	public void setHora(Date hora) {
+	
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
+
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "id_juiz", nullable = false)
 	public Juiz getJuiz() {
@@ -117,7 +109,7 @@ public class Jogo implements Serializable {
 		this.juiz = juiz;
 	}
 	
-	@NotNull
+	
 	@Column(name = "local", length = 20, nullable = false)
 	public String getLocal() {
 		return local;
@@ -127,7 +119,7 @@ public class Jogo implements Serializable {
 		this.local = local;
 	}
 
-	@NotNull
+	
 	@OneToOne
 	@JoinColumn( name = "id_time_casa", nullable = false)
 	public Time getTimeCasa() {
@@ -138,7 +130,7 @@ public class Jogo implements Serializable {
 		this.timeCasa = timeCasa;
 	}
 	
-	@NotNull
+	
 	@OneToOne
 	@JoinColumn( name = "id_visitante", nullable = false)
 	public Time getVisitante() {
@@ -150,7 +142,7 @@ public class Jogo implements Serializable {
 	}
 	
 	@OneToOne
-	@JoinColumn(name = "id_resultado")
+	@JoinColumn(name = "id_resultado", nullable = true )
 	public Resultado getResultado() {
 		return resultado;
 	}
@@ -183,9 +175,6 @@ public class Jogo implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 	
 }

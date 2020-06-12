@@ -9,9 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,7 +26,6 @@ public class Time implements Serializable {
 	private String nome;
 	private int pontuacao;
 	private List<Jogador> jogadores= new ArrayList<Jogador>();
-	private List<Jogo> jogos = new ArrayList<Jogo>();
 	
 	public Time() {
 	}
@@ -63,26 +63,6 @@ public class Time implements Serializable {
 		this.pontuacao = pontuacao;
 	}
 	
-	@NotNull
-	@OneToMany(mappedBy = "time")
-	public List<Jogador> getJogadores() {
-		return jogadores;
-	}
-
-	public void setJogadores( List<Jogador> jogadores) {
-		this.jogadores= jogadores ;
-	}
-	
-	@NotNull
-	@OneToMany // talvez colocar joincolunm
-	public List<Jogo> getJogos() {
-		return jogos;
-	}
-
-	public void setJogos( List<Jogo> jogos) {
-		this.jogos = jogos;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

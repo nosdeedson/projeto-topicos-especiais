@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.omnifaces.cdi.ViewScoped;
+
 @ApplicationScoped
 public class EntityManagerProducer {
 	
@@ -18,7 +20,7 @@ public class EntityManagerProducer {
 	}
 	
 	@Produces
-	@RequestScoped
+	@ViewScoped
 	public EntityManager createEntityManger() {
 		return emf.createEntityManager();
 	}

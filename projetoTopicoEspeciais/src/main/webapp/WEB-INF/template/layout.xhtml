@@ -19,7 +19,7 @@
 	</header>
 	<h:form>
 		<p:menubar >
-			<p:menuitem value="Home" icon="ui-icon-home" action="index" url="index.xhtml" />
+			<p:menuitem value="Home" icon="ui-icon-home" action="index" url="index.xhtml"   />
 			<p:submenu label="Cadastros" icon="ui-icon-plus">
 				<p:menuitem value="Bandeirinha" action="cadastroBandeirinha" url="cadastroBandeirinha.xhtml"/>
 				<p:menuitem value="Campeonato" action="cadastroCampeonato" url="cadastroCampeonato.xhtml"/>
@@ -29,8 +29,10 @@
 				<p:menuitem value="Time" action="cadastroTime" url="cadastroTime.xhtml"/>
 			</p:submenu>
 			<p:submenu label="Consultas" icon="ui-icon-search">
-				<p:menuitem value="Pessoas" action="#" url="#"/>
-				<p:menuitem value="" action="#" url="#"/>
+				<p:menuitem value="Bandeirinha" action="consultaBandeirinha" url="consultaBandeirinha.xhtml"/>
+				<p:menuitem value="Campeonato" action="consultaCampeonato" url="consultaCampeonato.xhtml"/>
+				<p:menuitem value="Jogadores" action="consultaJogador" url="consultaJogador.xhtml"/>
+				<p:menuitem value="Juizes" action="consultaJuiz" url="consultaJuiz.xhtml"/>
 			</p:submenu>
 		</p:menubar>
 	</h:form>

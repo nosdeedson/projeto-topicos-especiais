@@ -2,12 +2,12 @@ package br.com.edson.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,8 +20,8 @@ public class Jogador extends Pessoa implements Serializable {
 	private String posicao;
 	private Time time;
 	
+	
 	public Jogador() {
-		super();
 	}
 
 	public Jogador(String posicao) {
@@ -37,10 +37,9 @@ public class Jogador extends Pessoa implements Serializable {
 	public void setPosicao(String posicao) {
 		this.posicao = posicao;
 	}
-	
-	@NotNull
+
 	@OneToOne
-	@JoinColumn(name = "id_time")
+	@JoinColumn(name = "id_time", nullable = true)
 	public Time getTime() {
 		return time;
 	}
@@ -48,7 +47,8 @@ public class Jogador extends Pessoa implements Serializable {
 	public void setTime(Time time) {
 		this.time = time;
 	}
-//	
+	
+	
 	
 	
 }

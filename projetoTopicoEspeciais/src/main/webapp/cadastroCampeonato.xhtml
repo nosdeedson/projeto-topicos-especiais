@@ -17,13 +17,16 @@
 			<p:panelGrid columns="2" id="pgCadastroCamp" style="width:100%;" >
 				<p:outputLabel value="Digite nome" for="nome" />
 				<p:inputText id="nome" size="60" required="true" value="#{cadastroCampeonatoMBean.campeonato.nome}" />
+				
 				<p:outputLabel value="Data início" for="dataInicio"/>
 				<p:calendar id="dataInicio" required="true" value="#{cadastroCampeonatoMBean.campeonato.dataInicio}"/>
+				
 				<p:outputLabel for="dataFim" value="Data fim" />
 				<p:calendar id="dataFim" required="true" value="#{cadastroCampeonatoMBean.campeonato.dataFim}" />
 				
 				<p:outputLabel value="Tipo Campeonato" for="tipo" />
-				<p:selectOneMenu id="tipo" styleClass="menu" required="true" value="#{cadastroCampeonatoMBean.campeonato}">
+				
+				<p:selectOneMenu id="tipo" styleClass="menu" required="true" value="#{cadastroCampeonatoMBean.campeonato.tipoCampeonato}">
 					<f:selectItem itemLabel="Selecione" itemValue="Selecione" noSelectionOption="true" />
 					<f:selectItems value="#{cadastroCampeonatoMBean.tipoCampeonato}" var="tipo"
 						itemValue="#{tipo}" itemLabel="#{tipo.descricao}"  />

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/layout.xhtml">
+
+<f:metadata>
+	<f:viewAction action="#{consultaBandeirinhaMBean.buscaBandeirinhas}"></f:viewAction>
+</f:metadata>
+<ui:define name="titulo">Bandeirinhas</ui:define>
+<ui:define name="conteudo">
+
+		<h:form id="frm">
+		
+			<p:messages />
+			<br/>
+			<p:dataTable id="tableB" value="#{consultaBandeirinhaMBean.bandeirinhas}" var="b" cellspacing="0" cellpading="2" 
+				paginator="true" rows="5" paginatorPosition="bottom" emptyMessage="Lista vazia!!">
+				
+				<p:column headerText="ID" sortBy="#{b.id}">
+					<p:outputLabel value="#{b.id}"/>
+				</p:column>
+				<p:column headerText="Bandeirinha" sortBy="#{b.nome}">
+					<p:outputLabel value="#{b.nome}"/>
+				</p:column>
+				<p:column headerText="Ações">
+				
+					<p:button value="editar" outcome="/cadastroBandeirinha" >
+						<f:param name="id" value="#{b.id}"/>
+					</p:button>
+					
+					<p:commandButton title="Excluir" action="#{consultaBandeirinhaMBean.excluirB}" update="@form">
+						<f:setPropertyActionListener value="#{b}" target="#{consultaBandeirinhaMBean.banderinhaSerExcluido}"/>
+						<p:confirm header="Confirmação" message="Você realmente quer excluir?" icon="pi pi-exclamation-triangle"/>
+					</p:commandButton>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+					</p:confirmDialog>
+				</p:column>
+		</p:dataTable>
+
+		</h:form>
+
+</ui:define>
+
+
+</ui:composition>

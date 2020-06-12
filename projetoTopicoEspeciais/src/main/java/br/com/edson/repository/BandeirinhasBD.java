@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import br.com.edson.Model.Bandeirinha;
@@ -21,16 +20,18 @@ public class BandeirinhasBD implements Serializable {
 		this.em = em;
 	}
 	
+	
+	public void excluirBandeirinha(Bandeirinha bandeirinha){
+		em.remove(bandeirinha);
+	}
+	
 	public Bandeirinha porId(Long id){
 		return em.find(Bandeirinha.class, id);		
 	}
 	
+	
 	public void salvarBandeirinha( Bandeirinha bandeirinha) {
-		EntityTransaction et = em.getTransaction();
-		
-		et.begin();
 		em.merge(bandeirinha);
-		et.commit();
 	}
 	
 	public List<Bandeirinha> todos(){

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/layout.xhtml">
+	
+<f:metadata>
+	<f:viewAction action="#{consultaJogadorMBean.buscarJogadores}"></f:viewAction>
+</f:metadata>
+<ui:define name="titulo">Jogadores</ui:define>
+<ui:define name="conteudo">
+
+		<h:form id="frm">
+		
+			<p:messages />
+			<br/>
+			<p:dataTable value="#{consultaJogadorMBean.jogadores}" var="jogador" cellspacing="0" cellpading="2" paginator="true" rows="5" paginatorPosition="bottom"
+				emptyMessage="Lista vazia!!">
+				<p:column headerText="id" sortBy="#{jogador.id}">
+					<p:outputLabel value="#{jogador.id}" />
+				</p:column>
+				<p:column headerText="Jogador" sortBy="#{jogador.nome}">
+					<p:outputLabel value="#{jogador.nome}"/>
+				</p:column>
+				<p:column headerText="Posição" sortBy="#{jogador.posicao}">
+					<p:outputLabel value="#{jogador.posicao}"/>
+				</p:column>
+				
+				
+				<p:column headerText="Ações">
+					<p:button value="editar" outcome="/cadastroJogador">
+						<f:param name="id" value="#{jogador.id}"/>
+					</p:button>
+					
+					<p:commandButton title="Excluir" action="#{consultaJogadorMBean.excluir}" update="@form">
+						<f:setPropertyActionListener value="#{jogador}" target="#{consultaJogadorMBean.jogadorSerExcluido}"/>
+						<p:confirm header="Confirmação" message="Você realmente quer excluir?" icon="pi pi-exclamation-triangle"/>
+					</p:commandButton>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+					</p:confirmDialog>
+				</p:column>
+			
+			</p:dataTable>
+			
+			
+
+		</h:form>
+
+</ui:define>
+
+
+</ui:composition>

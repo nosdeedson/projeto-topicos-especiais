@@ -8,6 +8,7 @@
 	
 <f:metadata >
  <f:viewAction action="#{cadastroJogadorMBean.buscaTimes}"></f:viewAction>
+ <f:viewParam name="id" value="#{cadastroJogadorMBean.jogador}"></f:viewParam>
 </f:metadata>
 <ui:define name="titulo">Cadastro Jogadores</ui:define>
 <ui:define name="conteudo">
@@ -24,9 +25,9 @@
 					<p:inputText id="posicao" size="60" required="true" value="#{cadastroJogadorMBean.jogador.posicao}" />
 					<p:outputLabel value="Time" for="time" />
 					
-					<p:selectOneMenu id="time" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+					<p:selectOneMenu id="time" styleClass="menu" filter="true" filterMatchMode="contains"
 					value="#{cadastroJogadorMBean.time}" >
-						<f:selectItem itemLabel="Selecione" itemValue="selecione" noSelectionOption="true" />
+						<f:selectItem itemLabel="selecione" itemValue="selecione" noSelectionOption="true" />
 						<f:selectItems value="#{cadastroJogadorMBean.times}" var="time" itemValue="#{time}"
 						itemLabel="#{time.nome}" />
 					</p:selectOneMenu>

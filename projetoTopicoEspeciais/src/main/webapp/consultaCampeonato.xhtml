@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/layout.xhtml">
+
+	<f:metadata>
+		<f:viewAction action="#{consultaCampeonatoMBean.buscaCampeonato}"></f:viewAction>
+	</f:metadata>
+	<ui:define name="titulo">Consulta Campeonato</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form id="frm">
+
+			<p:messages />
+			<br />
+			<p:outputLabel value="Torneio" for="torneio"  style="margin-left:320px; position:relative; top:25px;"/>
+			<p:selectOneMenu id="torneio" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
+				value="#{consultaCampeonatoMBean.torneio}" style="margin-left:400px;">
+				<f:selectItem itemLabel="Selecione" itemValue="Selecione"
+					noSelectionOption="true" />
+				<f:selectItems value="#{consultaCampeonatoMBean.torneios}" var="torneio"
+					itemLabel="#{torneio.nome}" itemValue="#{torneio}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel />
+			<p:commandButton value="Buscar" update="@form" action="#{consultaCampeonatoMBean.exibirJogos}" />
+			
+			<br/>
+			<br/>
+			<p:panelGrid columns="2" style="margin-left:400px">
+				<p:outputLabel value="Nome"/>
+				<p:outputLabel value="#{consultaCampeonatoMBean.torneio.nome}"/>
+				<p:outputLabel value="Data inicio"/>
+				<p:outputLabel value="#{consultaCampeonatoMBean.torneio.dataInicio}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</p:outputLabel>
+				<p:outputLabel value="Data fim"/>
+				<p:outputLabel value="#{consultaCampeonatoMBean.torneio.dataFim}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</p:outputLabel>
+				<p:outputLabel value="Tipo"/>
+				<p:outputLabel value="#{consultaCampeonatoMBean.torneio.tipoCampeonato.descricao}"/>
+			</p:panelGrid>
+			
+			<br/>
+			<br/>
+			<p:dataTable id="tableB" value="#{consultaCampeonatoMBean.jogos}" var="jogo" cellspacing="0" cellpading="2" 
+				paginator="true" rows="5" paginatorPosition="bottom" emptyMessage="Lista vazia!!">
+				
+				<p:column headerText="id" sortBy="#{jogo.idJogo}" width="8%" >
+					<p:outputLabel value="#{jogo.idJogo}"/>
+				</p:column>
+				
+				<p:column headerText="Mandante" sortBy="#{jogo.timeCasa.nome}" width="12%">
+					<p:outputLabel value="#{jogo.timeCasa.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Visitante" width="12%">
+					<p:outputLabel value="#{jogo.visitante.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Informe o Resultado" >
+					<p:column>
+						<p:selectOneRadio id="console" value="#{consultaCampeonatoMBean.jogo}" unselectable="true">
+				            <f:selectItem itemLabel="#{jogo.timeCasa.nome}" itemValue="resultado.vencedor" />
+				            <f:selectItem itemLabel="#{jogo.visitante.nome}" itemValue="resultado.vencedor" />
+				            <f:selectItem itemLabel="empate" itemValue="resultado.empate" />
+				        </p:selectOneRadio>
+				     
+					</p:column>
+					
+				</p:column>
+				
+				<p:column headerText="Enviar" width="12%">
+					  <p:commandButton title="Salvar"  update="@form" icon="ui-icon-disk"
+					  action="#{consultaCampeonatoMBean.salvarResultado}" />
+				</p:column>
+			</p:dataTable>
+
+
+
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

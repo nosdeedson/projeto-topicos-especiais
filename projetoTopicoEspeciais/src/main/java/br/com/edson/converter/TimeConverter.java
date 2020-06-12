@@ -22,7 +22,7 @@ public class TimeConverter implements Converter {
 		
 		Time time = null;
 		
-		if( value != null && !"".equals(value))
+		if( value != null && !"".equals(value) && !value.equals("selecione"))
 			time = timesBD.porId( new Long(value));
 		return time;
 	}

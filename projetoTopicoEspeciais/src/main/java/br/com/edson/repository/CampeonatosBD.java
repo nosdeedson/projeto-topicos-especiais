@@ -1,10 +1,12 @@
 package br.com.edson.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import br.com.edson.Model.Campeonato;
 
@@ -19,7 +21,7 @@ public class CampeonatosBD implements Serializable {
 		this.em = em;
 	}
 	
-	public Campeonato porid( Long id) {
+	public Campeonato porId( Long id) {
 		return em.find(Campeonato.class, id);
 	}
 	
@@ -31,6 +33,10 @@ public class CampeonatosBD implements Serializable {
 		et.commit();
 	}
 	
+	public List<Campeonato> todos(){
+		TypedQuery<Campeonato> query = this.em.createQuery("from Campeonato", Campeonato.class);
+		return query.getResultList();
+	}
 	
 
 }
