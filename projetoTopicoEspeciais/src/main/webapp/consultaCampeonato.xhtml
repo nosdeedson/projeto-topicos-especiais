@@ -48,36 +48,30 @@
 			
 			<br/>
 			<br/>
-			<p:dataTable id="tableB" value="#{consultaCampeonatoMBean.jogos}" var="jogo" cellspacing="0" cellpading="2" 
-				paginator="true" rows="5" paginatorPosition="bottom" emptyMessage="Lista vazia!!">
+			
+			<p:dataTable value="#{consultaCampeonatoMBean.jogos}" var="game" cellspacing="0" cellpading="2" paginator="true" rows="5" 
+				paginatorPosition="bottom" emptyMessage="Sem Jogos!!" >
 				
-				<p:column headerText="id" sortBy="#{jogo.idJogo}" width="8%" >
-					<p:outputLabel value="#{jogo.idJogo}"/>
+				<p:column headerText="id" sortBy="#{game.idJogo}" width="3%" >
+					<p:outputLabel value="#{game.idJogo}"/>
 				</p:column>
-				
-				<p:column headerText="Mandante" sortBy="#{jogo.timeCasa.nome}" width="12%">
-					<p:outputLabel value="#{jogo.timeCasa.nome}"/>
+				<p:column headerText="Mandante" sortBy="#{game.timeCasa}" width="10%">
+					<p:outputLabel value="#{game.timeCasa.nome}"/>
 				</p:column>
 				
 				<p:column headerText="Visitante" width="12%">
-					<p:outputLabel value="#{jogo.visitante.nome}"/>
+					<p:outputLabel value="#{game.visitante.nome}"/>
 				</p:column>
 				
-				<p:column headerText="Informe o Resultado" >
-					<p:column>
-						<p:selectOneRadio id="console" value="#{consultaCampeonatoMBean.jogo}" unselectable="true">
-				            <f:selectItem itemLabel="#{jogo.timeCasa.nome}" itemValue="resultado.vencedor" />
-				            <f:selectItem itemLabel="#{jogo.visitante.nome}" itemValue="resultado.vencedor" />
-				            <f:selectItem itemLabel="empate" itemValue="resultado.empate" />
-				        </p:selectOneRadio>
-				     
-					</p:column>
-					
+				<p:column headerText="Informe resultado" width="20%">
+					<p:selectOneRadio id="console" value="#{game}" unselectable="true"  >
+				            <f:selectItem id="casa" itemLabel="#{game.timeCasa.nome}" itemValue="#{game.timeCasa.nome}"  />
+				            <f:selectItem id="visitante" itemLabel="#{game.visitante.nome}" itemValue="#{game.visitante.nome}" />
+				            <f:selectItem id="empate" itemLabel="empate" itemValue="resultado.empate" />
+				     </p:selectOneRadio>
 				</p:column>
-				
-				<p:column headerText="Enviar" width="12%">
-					  <p:commandButton title="Salvar"  update="@form" icon="ui-icon-disk"
-					  action="#{consultaCampeonatoMBean.salvarResultado}" />
+				<p:column headerText="Salve" width="3%">
+				     <p:commandButton title="salvar" icon="ui-icon-disk" action="#{consultaCampeonatoMBean.salvarResultado}" />
 				</p:column>
 			</p:dataTable>
 

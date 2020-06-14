@@ -38,6 +38,7 @@ public class ConsultaCampeonatoMBean implements Serializable {
 	
 	
 	
+	// metodos
 	public void buscaCampeonato() {
 		torneios = torneiosBD.todos();
 	}
@@ -47,13 +48,16 @@ public class ConsultaCampeonatoMBean implements Serializable {
 	}
 	
 	public void salvarResultado() {
-		JOptionPane.showMessageDialog(null, resultado.getVencedor());
+			JOptionPane.showMessageDialog(null, "teste");
 	}
 	
 	// getters and setters
+	
+	
 	public List<Campeonato> getTorneios() {
 		return torneios;
 	}
+
 
 	public void setTorneios(List<Campeonato> torneios) {
 		this.torneios = torneios;
