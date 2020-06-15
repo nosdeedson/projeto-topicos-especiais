@@ -21,7 +21,6 @@ public class Resultado implements Serializable {
 	
 	private Long idResultado;
 	private boolean empate;
-	private String perdedor; // recebo o nome do time
 	private String vencedor; // recebe o nome do time
 	
 	public Resultado() {
@@ -47,16 +46,6 @@ public class Resultado implements Serializable {
 
 	public void setEmpate(boolean empate) {
 		this.empate = empate;
-	}
-
-	@Column(name = "perdedor", length = 20, nullable = true)
-	public String getPerdedor() {
-		return perdedor;
-	}
-
-
-	public void setPerdedor(String perdedor) {
-		this.perdedor = perdedor;
 	}
 
 	@Column(name = "vencedor", length = 20, nullable = true)

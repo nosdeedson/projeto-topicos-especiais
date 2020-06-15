@@ -18,6 +18,7 @@
 			<p:messages />
 			<br />
 			<p:outputLabel value="Torneio" for="torneio"  style="margin-left:320px; position:relative; top:25px;"/>
+			
 			<p:selectOneMenu id="torneio" styleClass="menu" required="true" filter="true" filterMatchMode="contains"
 				value="#{consultaCampeonatoMBean.torneio}" style="margin-left:400px;">
 				<f:selectItem itemLabel="Selecione" itemValue="Selecione"
@@ -31,7 +32,9 @@
 			
 			<br/>
 			<br/>
-			<p:panelGrid columns="2" style="margin-left:400px">
+			
+			
+			<p:panelGrid id="pgTorneio" columns="2" style="margin-left:400px">
 				<p:outputLabel value="Nome"/>
 				<p:outputLabel value="#{consultaCampeonatoMBean.torneio.nome}"/>
 				<p:outputLabel value="Data inicio"/>
@@ -44,6 +47,25 @@
 				</p:outputLabel>
 				<p:outputLabel value="Tipo"/>
 				<p:outputLabel value="#{consultaCampeonatoMBean.torneio.tipoCampeonato.descricao}"/>
+				
+				<p:button value="editar" outcome="/cadastroBandeirinha" >
+						<f:param name="id" value="#{consultaCampeonatoMBean.torneio.idCampeonato}"/>
+				</p:button>
+				
+				<p:column>
+					<p:commandButton title="Excluir" action="#{consultaCampeonatoMBean.excluir}" update="@form" process="@form">
+						<f:setPropertyActionListener value="#{consultaCampeonatoMBean.torneio}" target="#{consultaCampeonatoMBean.torneioSerExcluido}"/>
+						<p:confirm header="Confirmação" message="Você realmente quer excluir?" icon="pi pi-exclamation-triangle"/>
+					</p:commandButton>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+					</p:confirmDialog>
+				
+				</p:column>
+
+				
 			</p:panelGrid>
 			
 			<br/>
@@ -55,23 +77,26 @@
 				<p:column headerText="id" sortBy="#{game.idJogo}" width="3%" >
 					<p:outputLabel value="#{game.idJogo}"/>
 				</p:column>
-				<p:column headerText="Mandante" sortBy="#{game.timeCasa}" width="10%">
+				<p:column headerText="Mandante" sortBy="#{game.timeCasa}" width="20%">
 					<p:outputLabel value="#{game.timeCasa.nome}"/>
 				</p:column>
 				
-				<p:column headerText="Visitante" width="12%">
+				<p:column headerText="Visitante" width="20%">
 					<p:outputLabel value="#{game.visitante.nome}"/>
 				</p:column>
 				
-				<p:column headerText="Informe resultado" width="20%">
-					<p:selectOneRadio id="console" value="#{game}" unselectable="true"  >
-				            <f:selectItem id="casa" itemLabel="#{game.timeCasa.nome}" itemValue="#{game.timeCasa.nome}"  />
-				            <f:selectItem id="visitante" itemLabel="#{game.visitante.nome}" itemValue="#{game.visitante.nome}" />
-				            <f:selectItem id="empate" itemLabel="empate" itemValue="resultado.empate" />
-				     </p:selectOneRadio>
+				<p:column headerText="Ganhador/Empate" width="20%">
+					 
+					<p:outputLabel value="empate" rendered="#{game.resultado.empate}"/>
+					<p:outputLabel value="#{game.resultado.vencedor}" rendered="#{game.timeCasa.nome eq game.resultado.vencedor}"/>
+					<p:outputLabel value="#{game.resultado.vencedor}" rendered="#{game.visitante.nome eq game.resultado.vencedor}"/>
+					<p:outputLabel value="Ser jogado" rendered="#{game.resultado eq null}"/>
 				</p:column>
-				<p:column headerText="Salve" width="3%">
-				     <p:commandButton title="salvar" icon="ui-icon-disk" action="#{consultaCampeonatoMBean.salvarResultado}" />
+				
+				<p:column headerText="Informe resultado" width="10%">
+					<p:button title="salvar" outcome="/cadastroResultado" icon="ui-icon-disk"  >
+						<f:param name="id" value="#{game.idJogo}"/>
+					</p:button>
 				</p:column>
 			</p:dataTable>
 

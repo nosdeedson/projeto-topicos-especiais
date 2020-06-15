@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 
 import br.com.edson.Model.Resultado;
 
@@ -18,8 +20,18 @@ public class ResultadosBD implements Serializable {
 		this.em = em;
 	}
 	
-	public void salvarResultado(Resultado resultado) {
+	public Long salvarResultado(Resultado resultado) {
 		this.em.merge(resultado);
+		
+		String sql = "select max(idResultado) from Resultado";
+		
+		Long query = this.em.createQuery(sql, Long.class).getSingleResult();
+		System.out.println(query);
+		return query;
+	}
+
+	public Resultado porId(Long id) {
+		return this.em.find(Resultado.class, id);
 	}
 	
 }

@@ -25,7 +25,6 @@ public class Time implements Serializable {
 	private Long idTime;
 	private String nome;
 	private int pontuacao;
-	private List<Jogador> jogadores= new ArrayList<Jogador>();
 	
 	public Time() {
 	}

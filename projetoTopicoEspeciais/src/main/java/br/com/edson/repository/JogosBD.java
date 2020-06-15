@@ -39,6 +39,10 @@ public class JogosBD implements Serializable {
 		}
 		return jogos;
 	}
+
+	public Jogo porId(Long id) {
+		return this.em.find(Jogo.class, id);
+	}
 	
 	
 

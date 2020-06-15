@@ -30,11 +30,7 @@ public class JuizesBD implements Serializable {
 	}
 
 	public void salvarJuiz(Juiz juiz) {
-		EntityTransaction et = em.getTransaction();
-
-		et.begin();
 		em.merge(juiz);
-		et.commit();
 	}
 
 	public List<Juiz> todos() {

@@ -26,16 +26,18 @@ public class CampeonatosBD implements Serializable {
 	}
 	
 	public void salvar(Campeonato campeonato) {
-		EntityTransaction et = em.getTransaction();
-		
-		et.begin();		
+			
 		em.merge(campeonato);
-		et.commit();
+
 	}
 	
 	public List<Campeonato> todos(){
 		TypedQuery<Campeonato> query = this.em.createQuery("from Campeonato", Campeonato.class);
 		return query.getResultList();
+	}
+
+	public void excluirCampeonato(Campeonato torneioSerExcluido) {
+		this.em.remove(torneioSerExcluido);		
 	}
 	
 

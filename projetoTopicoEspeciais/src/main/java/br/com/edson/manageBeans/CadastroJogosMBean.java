@@ -116,9 +116,10 @@ public class CadastroJogosMBean implements Serializable {
 			context.addMessage(null, new FacesMessage("Jogo salvo com sucesso!!!"));
 			et.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			et.rollback();
 			FacesMessage msg = new FacesMessage(e.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
 		}
 	}
 

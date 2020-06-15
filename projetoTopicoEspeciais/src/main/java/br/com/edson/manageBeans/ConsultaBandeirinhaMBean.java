@@ -53,7 +53,6 @@ public class ConsultaBandeirinhaMBean implements Serializable {
 
 		} catch (Exception e) {
 			et.rollback();
-			e.printStackTrace();
 			FacesMessage msg = new FacesMessage(e.getMessage());
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context.addMessage(null, msg);

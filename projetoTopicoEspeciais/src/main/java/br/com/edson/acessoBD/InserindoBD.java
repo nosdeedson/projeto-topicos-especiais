@@ -76,8 +76,9 @@ public static void inserir(EntityManager em) throws ParseException {
 		game.setCampeonato(camp);
 		
 		Resultado res = new Resultado();
-		res.setVencedor(t.getNome());
-		res.setPerdedor(t2.getNome());
+		
+		res.setVencedor(t2.getNome());
+		t2.setPontuacao(3);
 		res.setEmpate(false);
 		
 		game.setResultado(res);

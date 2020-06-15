@@ -21,16 +21,18 @@ public class TimesBD implements Serializable {
 		this.em = em;
 	}
 	
+	public void excluirTime( Time time) {
+		this.em.remove(time);
+	}
+	
 	public Time porId(Long id) {
 		 return this.em.find(Time.class, id);
 	}
 	
 	public void salvarTime(Time time) {
-		EntityTransaction et = em.getTransaction();
 		
-		et.begin();
 		em.merge(time);
-		et.commit();
+	
 	}
 	
 	public List<Time> todos(){
