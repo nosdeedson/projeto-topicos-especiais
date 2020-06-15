@@ -27,7 +27,9 @@
 				</p:column>
 				
 				<p:column headerText="Ações" >
-					<p:commandButton value="editar"    />
+					<p:button value="editar" outcome="/cadastroJuiz">
+						<f:param name="id"  value="#{juiz.id}"/>
+					</p:button>
 					
 					
 				<p:commandButton title="Excluir" action="#{consultaJuizMBean.excluirJ}" 

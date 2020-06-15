@@ -6,6 +6,9 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template/layout.xhtml">
 	
+<f:metadata>
+	<f:viewParam name="id" value="#{cadastroCampeonatoMBean.campeonato}"/>
+</f:metadata>
 <ui:define name="titulo">Cadastro Campeonato</ui:define>
 <ui:define name="conteudo">
 
